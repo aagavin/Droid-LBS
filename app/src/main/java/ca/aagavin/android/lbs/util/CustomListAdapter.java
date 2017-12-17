@@ -1,4 +1,4 @@
-package ca.aagavin.android.lbs;
+package ca.aagavin.android.lbs.util;
 
 import android.app.Activity;
 import android.support.annotation.NonNull;
@@ -10,7 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.util.List;
+import ca.aagavin.android.lbs.R;
 
 public class CustomListAdapter extends ArrayAdapter {
 
@@ -26,7 +26,12 @@ public class CustomListAdapter extends ArrayAdapter {
     //to store the list of countries
     private final String[] addressViewIdArray;
 
-    public CustomListAdapter(Activity context, Integer[] imageViewIdArray, String[] titleViewIdArray, String[] addressViewIdArray) {
+    public CustomListAdapter(
+        Activity context,
+        String[] titleViewIdArray,
+        String[] addressViewIdArray,
+        Integer[] imageViewIdArray
+    ) {
         super(context, R.layout.listview_row, titleViewIdArray);
 
         this.context = context;
