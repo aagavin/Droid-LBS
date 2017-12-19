@@ -14,6 +14,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void selectBtnClick(View view) {
-        startActivity(new Intent(this, RestaurantListActivity.class));
+        startActivity(new Intent(this, CuisineActivity.class));
     }
 }
