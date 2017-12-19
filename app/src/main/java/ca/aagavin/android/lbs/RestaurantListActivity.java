@@ -1,6 +1,5 @@
 package ca.aagavin.android.lbs;
 
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -8,81 +7,36 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import java.util.Map;
+
 import ca.aagavin.android.lbs.util.CustomListAdapter;
 import ca.aagavin.android.lbs.util.LatLong;
+import ca.aagavin.android.lbs.util.Resturants;
 
 public class RestaurantListActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
-
-    public String[] titleViewIdArray;
-    public String[] addressViewIdArray;
-    public Integer[] imageViewIdArray;
-
-    private LatLong[] _LatLongArray;
-
-    private ListView _listView;
-
+    private Map<String, Object[]> _mapselected;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_restaurant_list);
 
-        this._setArrays();
+        Bundle extras = getIntent().getExtras();
+        String selectedCusine = extras.getString("cusine");
+
+        _mapselected = Resturants.getResturantsByCusineType(selectedCusine);
+
         CustomListAdapter customListAdapter = new CustomListAdapter(
                 this,
-                titleViewIdArray,
-                addressViewIdArray,
-                imageViewIdArray
+                (String[]) _mapselected.get("titles"),
+                (String[]) _mapselected.get("addresses"),
+                (Integer[]) _mapselected.get("images")
         );
 
-        this._listView = (ListView) findViewById(R.id.listview);
-        this._listView.setAdapter(customListAdapter);
-        this._listView.setOnItemClickListener(this);
-
-    }
-
-    private void _setArrays() {
-        // set title array
-        this.titleViewIdArray = new String[]{
-            "Pizza Hut",
-            "The Real McCoy",
-            "Johnny's Hamburgers",
-            "Milestones Grill and Bar",
-            "AllStar Wings & Ribs",
-            "Chris Jerk"
-        };
-
-        // set address array
-        this.addressViewIdArray = new String[]{
-            "3351 Lawrence Ave E, Scarborough, ON M1H 1A8",
-            "1033 Markham Rd, Scarborough, ON M1H 2G1",
-            "2595 Victoria Park Ave, Scarborough, ON M1T 1A4",
-            "300 Borough Dr, Scarborough, ON M1P 4P5",
-            "1245 McCowan Rd #1, Scarborough, ON M1H 3K3",
-            "2570 Birchmount Rd, Scarborough, ON M1T 2M5"
-        };
-
-        // set images array
-        this.imageViewIdArray = new Integer[] {
-            R.drawable.placeholder,
-            R.drawable.placeholder,
-            R.drawable.placeholder,
-            R.drawable.placeholder,
-            R.drawable.placeholder,
-            R.drawable.placeholder,
-        };
-
-        // set long lat array
-        this._LatLongArray = new LatLong[]{
-            new LatLong(43.7740451, -79.2636021),
-            new LatLong(43.7635487, -79.2946119),
-            new LatLong(43.7740644, -79.2325777),
-            new LatLong(43.7769881, -79.254876),
-            new LatLong(43.7744804, -79.2546924),
-            new LatLong(43.7896673, -79.3026652)
-        };
-
+        ListView _listView = (ListView) findViewById(R.id.listview);
+        _listView.setAdapter(customListAdapter);
+        _listView.setOnItemClickListener(this);
 
     }
 
@@ -90,7 +44,8 @@ public class RestaurantListActivity extends AppCompatActivity implements Adapter
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-        LatLong latLong = this._LatLongArray[i];
+        LatLong[] latLongArray = (LatLong[]) this._mapselected.get("longlats");
+        LatLong latLong = latLongArray[i];
         Toast.makeText(this, "Clicked: " + i + " | lat: " + latLong.getLatitude() + ", long: " + latLong.getLongitude(), Toast.LENGTH_SHORT).show();
 
 //        Intent intent = new Intent(this, {{INSERT CLASS HERE}} );
