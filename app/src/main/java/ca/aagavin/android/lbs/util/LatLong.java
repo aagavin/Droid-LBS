@@ -5,7 +5,8 @@ public class LatLong {
     private double latitude;
     private double longitude;
 
-    public LatLong(double latitude, double longitude) {
+
+    LatLong(double latitude, double longitude) {
         this.latitude = latitude;
         this.longitude = longitude;
     }

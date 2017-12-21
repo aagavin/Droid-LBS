@@ -1,7 +1,9 @@
 package ca.aagavin.android.lbs;
 
 import android.os.Bundle;
+import android.support.v4.*;
 import android.support.v4.app.FragmentActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
@@ -9,12 +11,15 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
+public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback, RadioGroup.OnCheckedChangeListener {
 
     private GoogleMap mMap;
+    private String _markerName;
 
     private double _lat;
     private double _long;
@@ -32,31 +37,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         Bundle extras = getIntent().getExtras();
         this._lat = extras.getDouble("Lat");
         this._long = extras.getDouble("Long");
+        this._markerName = extras.getString("markerName");
 
 
         RadioGroup rg = (RadioGroup) findViewById(R.id.RG);
-
-         RadioButton rbNormal = (RadioButton) findViewById(R.id.radioNormal);
-         RadioButton rbSatellite = (RadioButton) findViewById(R.id.radioSatellite);
-        RadioButton rbTerrain = (RadioButton) findViewById(R.id.radioTerrain);
-
-        rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                if(i == R.id.radioNormal){
-                    mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-
-                }
-                if(i == R.id.radioSatellite){
-                    mMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
-                }
-                if(i == R.id.radioTerrain){
-                    mMap.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
-                }
-
-
-            }
-        });
+        rg.setOnCheckedChangeListener(this);
 
     }
 
@@ -75,13 +60,33 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap = googleMap;
 
         // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(this._lat, this._long);
+        LatLng location = new LatLng(this._lat, this._long);
 
         //set map type to satellite
         mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-        mMap.resetMinMaxZoomPreference();
-        mMap.setMinZoomPreference(5f);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+
+
+        // Move the camera instantly to location with a zoom of 15.
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 20f));
+
+        // Zoom in, animating the camera.
+        mMap.animateCamera(CameraUpdateFactory.zoomTo(14), 2000, null);
+        mMap.addMarker(new MarkerOptions().position(location).title(this._markerName));
+
+    }
+
+    @Override
+    public void onCheckedChanged(RadioGroup radioGroup, int i) {
+        if(i == R.id.radioNormal){
+            mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+
+        }
+        if(i == R.id.radioSatellite){
+            mMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
+        }
+        if(i == R.id.radioTerrain){
+            mMap.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
+        }
+
     }
 }

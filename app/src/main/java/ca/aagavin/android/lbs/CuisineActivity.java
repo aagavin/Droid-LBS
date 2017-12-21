@@ -20,9 +20,7 @@ public class CuisineActivity extends AppCompatActivity implements AdapterView.On
         this._listView = (ListView) findViewById(R.id.listview);
         this._listView.setOnItemClickListener(this);
 
-
     }
-
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -30,10 +28,6 @@ public class CuisineActivity extends AppCompatActivity implements AdapterView.On
 
         Intent intent = new Intent(this, RestaurantListActivity.class);
         intent.putExtra("cusine", selectOption);
-
-
         startActivity(intent);
-
-
     }
 }
