@@ -12,6 +12,10 @@ public class CuisineActivity extends AppCompatActivity implements AdapterView.On
 
     private ListView _listView;
 
+    /**
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,20 +24,21 @@ public class CuisineActivity extends AppCompatActivity implements AdapterView.On
         this._listView = (ListView) findViewById(R.id.listview);
         this._listView.setOnItemClickListener(this);
 
-
     }
 
-
+    /**
+     *
+     * @param adapterView
+     * @param view
+     * @param i
+     * @param l
+     */
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
         String selectOption = (String) this._listView.getItemAtPosition(i);
 
         Intent intent = new Intent(this, RestaurantListActivity.class);
         intent.putExtra("cusine", selectOption);
-
-
         startActivity(intent);
-
-
     }
 }
