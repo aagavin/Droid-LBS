@@ -2,6 +2,8 @@ package ca.aagavin.android.lbs;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -30,6 +32,32 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         Bundle extras = getIntent().getExtras();
         this._lat = extras.getDouble("Lat");
         this._long = extras.getDouble("Long");
+
+
+        RadioGroup rg = (RadioGroup) findViewById(R.id.RG);
+
+         RadioButton rbNormal = (RadioButton) findViewById(R.id.radioNormal);
+         RadioButton rbSatellite = (RadioButton) findViewById(R.id.radioSatellite);
+        RadioButton rbTerrain = (RadioButton) findViewById(R.id.radioTerrain);
+
+        rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                if(i == R.id.radioNormal){
+                    mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+
+                }
+                if(i == R.id.radioSatellite){
+                    mMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
+                }
+                if(i == R.id.radioTerrain){
+                    mMap.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
+                }
+
+
+            }
+        });
+
     }
 
 
@@ -50,9 +78,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         LatLng sydney = new LatLng(this._lat, this._long);
 
         //set map type to satellite
-        mMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
+        mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
         mMap.resetMinMaxZoomPreference();
-        mMap.setMinZoomPreference(15f);
+        mMap.setMinZoomPreference(5f);
         mMap.addMarker(new MarkerOptions().position(sydney).title("Marker"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
     }
