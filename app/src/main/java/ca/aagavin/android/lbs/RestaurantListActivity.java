@@ -48,11 +48,9 @@ public class RestaurantListActivity extends AppCompatActivity implements Adapter
         LatLong latLong = latLongArray[i];
         Toast.makeText(this, "Clicked: " + i + " | lat: " + latLong.getLatitude() + ", long: " + latLong.getLongitude(), Toast.LENGTH_SHORT).show();
 
-//        Intent intent = new Intent(this, {{INSERT CLASS HERE}} );
-//
-//        intent.putExtra("Lat", latLong.getLatitude());
-//        intent.putExtra("Long", latLong.getLongitude());
-//
-//        startActivity(intent);
+        Intent intent = new Intent(this, MapsActivity.class);
+        intent.putExtra("Lat", latLong.getLatitude());
+        intent.putExtra("Long", latLong.getLongitude());
+        startActivity(intent);
     }
 }
