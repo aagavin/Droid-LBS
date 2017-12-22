@@ -30,8 +30,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         setContentView(R.layout.activity_maps);
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
+        SupportMapFragment mapFragment =
+                (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
 
@@ -43,7 +43,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         RadioGroup rg = (RadioGroup) findViewById(R.id.RG);
         rg.setOnCheckedChangeListener(this);
-
     }
 
 
@@ -58,7 +57,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
      */
     @Override
     public void onMapReady(GoogleMap googleMap) {
-
         mMap = googleMap;
 
         // Add a marker in Sydney and move the camera
@@ -87,6 +85,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 mMap.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
                 break;
             default:
+                // default of MAP_TYPE_NORMAL
                 mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
                 break;
         }
