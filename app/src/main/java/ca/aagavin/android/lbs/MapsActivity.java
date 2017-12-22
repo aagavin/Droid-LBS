@@ -28,6 +28,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
+
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -37,8 +38,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         Bundle extras = getIntent().getExtras();
         this._lat = extras.getDouble("Lat");
         this._long = extras.getDouble("Long");
-        this._markerName = extras.getString("markerName");
 
+        setTitle(extras.getString("markerName"));
 
         RadioGroup rg = (RadioGroup) findViewById(R.id.RG);
         rg.setOnCheckedChangeListener(this);
@@ -57,16 +58,16 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
      */
     @Override
     public void onMapReady(GoogleMap googleMap) {
+
         mMap = googleMap;
 
         // Add a marker in Sydney and move the camera
         LatLng location = new LatLng(this._lat, this._long);
 
-        //set map type to satellite
+        //set map type to digital map
         mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 
-
-        // Move the camera instantly to location with a zoom of 15.
+        // Move the camera instantly to location with a zoom of 20.
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 20f));
 
         // Zoom in, animating the camera.
@@ -77,16 +78,19 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     @Override
     public void onCheckedChanged(RadioGroup radioGroup, int i) {
-        if(i == R.id.radioNormal){
-            mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 
+        switch (i){
+            case R.id.radioSatellite:
+                mMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
+                break;
+            case R.id.radioTerrain:
+                mMap.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
+                break;
+            default:
+                mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+                break;
         }
-        if(i == R.id.radioSatellite){
-            mMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
-        }
-        if(i == R.id.radioTerrain){
-            mMap.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
-        }
+
 
     }
 }
