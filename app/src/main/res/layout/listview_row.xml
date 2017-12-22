@@ -7,32 +7,31 @@
 
     <ImageView
         android:id="@+id/imageViewId"
-        android:layout_width="100dp"
-        android:layout_height="75dp"
-        android:layout_margin="5dp"
-        android:layout_weight="1"
+        android:layout_width="@dimen/list_view_row_img_width"
+        android:layout_height="@dimen/list_view_row_img_height"
+        android:layout_margin="@dimen/list_view_row_img_margin"
+        android:layout_weight="@dimen/one"
         app:srcCompat="@mipmap/ic_launcher" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:layout_weight="1"
+        android:layout_margin="@dimen/list_view_row_margin"
+        android:layout_weight="@dimen/one"
         android:orientation="vertical">
 
         <TextView
             android:id="@+id/titleViewId"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text=""
             android:textColor="@color/textPrimary"
-            android:textSize="18sp"
+            android:textSize="@dimen/list_view_row_text_size"
             android:textStyle="bold" />
 
         <TextView
             android:id="@+id/addressViewId"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="" />
+            />
     </LinearLayout>
 </LinearLayout>
