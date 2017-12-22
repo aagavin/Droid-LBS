@@ -39,6 +39,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         this._lat = extras.getDouble("Lat");
         this._long = extras.getDouble("Long");
 
+        this._markerName = extras.getString("markerName");
         setTitle(extras.getString("markerName"));
 
         RadioGroup rg = (RadioGroup) findViewById(R.id.RG);
