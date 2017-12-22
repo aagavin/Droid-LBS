@@ -51,6 +51,7 @@ public class RestaurantListActivity extends AppCompatActivity implements Adapter
         Intent intent = new Intent(this, MapsActivity.class);
         intent.putExtra("Lat", latLong.getLatitude());
         intent.putExtra("Long", latLong.getLongitude());
+
         intent.putExtra("markerName", title);
         startActivity(intent);
     }

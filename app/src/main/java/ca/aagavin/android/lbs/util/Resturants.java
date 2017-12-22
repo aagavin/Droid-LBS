@@ -16,10 +16,13 @@ public class Resturants {
         "Pizza Hut",
         "The Real McCoy",
         "Johnny's Greek Hamburgers",
+
         "Milestones Grill and Bar",
+
         "AllStar Wings & Ribs",
         "Chris Jerk",
         "Federick Restaurant",
+
         "Rawlicious Whitby",
         "DQ Grill & Chill Restaurant",
         "Topper's Pizza Whitby",
@@ -74,8 +77,6 @@ public class Resturants {
 
         Map<String, Object[]> map = new HashMap<>();
 
-
-
         switch (cusineType){
             case "Greek":
                 map.put("titles", Arrays.copyOfRange(titleViewIdArray, 0,3));
@@ -84,22 +85,20 @@ public class Resturants {
                 map.put("longlats", Arrays.copyOfRange(LatLongArray, 0,3));
                 break;
             case "Italian":
-                map.put("titles", Arrays.copyOfRange(titleViewIdArray, 4,6));
-                map.put("addresses", Arrays.copyOfRange(addressViewIdArray, 4,6));
-                map.put("images",  Arrays.copyOfRange(imageViewIdArray, 4,6));
-                map.put("longlats", Arrays.copyOfRange(LatLongArray, 4,6));
+                map.put("titles", Arrays.copyOfRange(titleViewIdArray, 4,7));
+                map.put("addresses", Arrays.copyOfRange(addressViewIdArray, 4,7));
+                map.put("images",  Arrays.copyOfRange(imageViewIdArray, 4,7));
+                map.put("longlats", Arrays.copyOfRange(LatLongArray, 4,7));
                 break;
             case "Fast Food":
-                map.put("titles", Arrays.copyOfRange(titleViewIdArray, 7,9));
-                map.put("addresses", Arrays.copyOfRange(addressViewIdArray, 7,9));
-                map.put("images",  Arrays.copyOfRange(imageViewIdArray, 7,9));
-                map.put("longlats", Arrays.copyOfRange(LatLongArray, 7,9));
+                map.put("titles", Arrays.copyOfRange(titleViewIdArray, 8,10));
+                map.put("addresses", Arrays.copyOfRange(addressViewIdArray, 8,10));
+                map.put("images",  Arrays.copyOfRange(imageViewIdArray, 8,10));
+                map.put("longlats", Arrays.copyOfRange(LatLongArray, 8,10));
                 break;
             default:
                 break;
-
         }
-
 
         return map;
     }
